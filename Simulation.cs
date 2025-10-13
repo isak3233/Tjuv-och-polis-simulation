@@ -13,9 +13,18 @@ namespace ToPSimulation
             int xSize = 100;
             int ySize = 25;
             City city = new City(Helper.GeneratePeople(10, 5, 3, xSize, ySize), xSize, ySize);
-            Console.WriteLine("=== CITY  ==============================================================================================");
-            Console.Write(city.GetStringPlace());
-            Console.WriteLine("========================================================================================================");
+            
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("=== CITY  ==============================================================================================");
+                Console.Write(city.GetStringPlace());
+                city.MovePeople();
+                Console.WriteLine("========================================================================================================");
+                Thread.Sleep(500);
+            }
+
+         
 
         }
     }
