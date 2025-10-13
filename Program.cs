@@ -11,7 +11,7 @@
             Console.Write("Helo");
 
             Console.Write("\ntest");
-            Console.Write("\Nytt test");
+            Console.Write("Nytt test");
         }
     }
 }
