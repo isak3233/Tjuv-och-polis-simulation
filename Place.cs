@@ -33,15 +33,15 @@ namespace ToPSimulation
                     {
                         if(person is Police)
                         {
-                            returnString += "P";
+                            returnString += "\u001b[34mP\u001b[0m";
                         }
                         if (person is Civil)
                         {
-                            returnString += "C";
+                            returnString += "\u001b[32mC\u001b[0m";
                         }
                         if (person is Thief)
                         {
-                            returnString += "T";
+                            returnString += "\u001b[31mT\u001b[0m";
                         } 
 
                     }
