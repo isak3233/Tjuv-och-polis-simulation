@@ -9,6 +9,7 @@
             Console.WriteLine("hej /anton");
 
             Console.Write("Helo");
+            Console.Write("\ntest");
         }
     }
 }
