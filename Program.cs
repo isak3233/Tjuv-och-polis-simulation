@@ -7,6 +7,8 @@
             Console.WriteLine("Stad!");
 
             Console.WriteLine("hej /anton");
+
+            Console.Write("Helo");
         }
     }
 }
