@@ -5,6 +5,8 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Stad!");
+
+            Console.WriteLine("hej /anton");
         }
     }
 }
