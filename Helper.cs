@@ -8,7 +8,7 @@ namespace ToPSimulation
 {
     public class Helper
     {
-        static private string[] listOfNames = {
+        static private string[] listOfNames = { //Lista med namn
             "Andersson",
             "Johansson",
             "Nilsson",
@@ -40,26 +40,26 @@ namespace ToPSimulation
             "Falk",
             "Åkesson"
 };
-        static public List<Person> GeneratePeople(int civilAmount, int policeAmount, int thiefAmount, int xSize, int ySize)
+        static public List<Person> GeneratePeople(int civilAmount, int policeAmount, int thiefAmount, int xSize, int ySize) //Genererar personer med unika positioner, samt riktning
         {
             int totalIndex = 0;
             List<Person> listOfPeople = new List<Person>();
 
-            for (int i = 0; i < civilAmount; i++)
+            for (int i = 0; i < civilAmount; i++) //civil
             {
                 int[] randomDirection = { Random.Shared.Next(-1, 2), Random.Shared.Next(-1, 2) };
                 int[] randomPositions = GetPosition(listOfPeople, xSize, ySize);
                 listOfPeople.Add(new Civil(listOfNames[totalIndex], randomPositions[0], randomPositions[1], randomDirection));
                 totalIndex++; 
             }
-            for (int i = 0; i < policeAmount; i++)
+            for (int i = 0; i < policeAmount; i++) //polis
             {
                 int[] randomDirection = { Random.Shared.Next(-1, 2), Random.Shared.Next(-1, 2) };
                 int[] randomPositions = GetPosition(listOfPeople, xSize, ySize);
                 listOfPeople.Add(new Police(listOfNames[totalIndex], randomPositions[0], randomPositions[1], randomDirection));
                 totalIndex++;
             }
-            for (int i = 0; i < thiefAmount; i++)
+            for (int i = 0; i < thiefAmount; i++) //Tjuv
             {
                 int[] randomDirection = { Random.Shared.Next(-1, 2), Random.Shared.Next(-1, 2) };
                 int[] randomPositions = GetPosition(listOfPeople, xSize, ySize);
@@ -69,7 +69,7 @@ namespace ToPSimulation
 
             return listOfPeople;
         }
-        static bool CheckIfPosistionTaken(List<Person> listOfPeople, int xPos, int yPos)
+        static bool CheckIfPosistionTaken(List<Person> listOfPeople, int xPos, int yPos) //kollar om positionen är tagen
         {
             foreach(Person person in listOfPeople)
             {
@@ -80,7 +80,7 @@ namespace ToPSimulation
             }
             return false;
         }
-        static int[] GetPosition(List<Person> listOfPeople, int xSize, int ySize)
+        static int[] GetPosition(List<Person> listOfPeople, int xSize, int ySize) //genererar en unik position
         {
             int randomXPos = Random.Shared.Next(0, xSize);
             int randomYPos = Random.Shared.Next(0, ySize);

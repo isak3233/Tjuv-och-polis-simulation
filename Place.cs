@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ToPSimulation
 {
-    public class Place
+    public class Place //skapar klassen Place
     {
         public List<Person> People { get; set; }
         public Person[,] Area { get; set; }
-        public Place(List<Person> people, int sizeX, int sizeY)
+        public Place(List<Person> people, int sizeX, int sizeY) //skapar en instans av klassen place 
         {
             Area = new Person[sizeY, sizeX];
             foreach (Person person in people)
@@ -19,7 +19,7 @@ namespace ToPSimulation
             }
             People = people;
         }
-        public string GetStringPlace()
+        public string GetStringPlace() //Skapar en string som innehåller en grafisk representation av platsen
         {
             string returnString = "";
             for(int i = 0; i < Area.GetLength(0); i++)
@@ -54,7 +54,7 @@ namespace ToPSimulation
             return returnString;
         }
     }
-    public class City : Place
+    public class City : Place //skapar subklassen City
     {
         public City(List<Person> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
         {
@@ -62,7 +62,7 @@ namespace ToPSimulation
         }
 
     }
-    public class Prison : Place
+    public class Prison : Place //skapar subklassen Prison
     {
         public Prison(List<Person> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
         {

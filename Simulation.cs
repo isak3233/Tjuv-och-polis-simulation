@@ -8,7 +8,7 @@ namespace ToPSimulation
 {
     public class Simulation
     {
-        public Simulation()
+        public Simulation() //Konstruktor för simulation
         {
             int xSize = 100;
             int ySize = 25;

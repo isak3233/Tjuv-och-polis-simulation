@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToPSimulation
 {
-    public class Person
+    public class Person //Skapar klassen Person
     {
         public string Name { get; set; }
         public int XPos { get; set; }
@@ -21,7 +21,7 @@ namespace ToPSimulation
             Directions = directions;
         }
     }
-    public class Police : Person
+    public class Police : Person //Skapar subklassen Polis
     {
         List<Item> Confiscated {  get; set; }
         public Police(string name, int xPos, int yPos, int[]directions) : base(name, xPos, yPos, directions)
@@ -29,7 +29,7 @@ namespace ToPSimulation
             Confiscated = new List<Item>();
         }
     }
-    public class Civil : Person
+    public class Civil : Person //Skapar subklassen Civil
     {
         List<Item> Belongings { get; set; }
         public Civil(string name, int xPos, int yPos, int[] directions) : base(name, xPos, yPos, directions)
@@ -37,7 +37,7 @@ namespace ToPSimulation
             Belongings = new List<Item>();
         }
     }
-    public class Thief : Person
+    public class Thief : Person //Skapar subklassen Tjuv
     {
         List<Item> Stolen { get; set; }
         public Thief(string name, int xPos, int yPos, int[] directions) : base(name, xPos, yPos, directions)
@@ -45,7 +45,7 @@ namespace ToPSimulation
             Stolen = new List<Item>();
         }
     }
-    public class Item
+    public class Item //Skapar klassen för items
     {
         public string Name { get; set;}
         public Item(string name)
