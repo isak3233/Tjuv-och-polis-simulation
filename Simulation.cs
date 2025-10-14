@@ -18,8 +18,9 @@ namespace ToPSimulation
             while (true)
             {
                 Console.Clear();
-                Console.Write(Helper.cityString + city.GetStringPlace() + Helper.cityLastString);
                 city.MovePeople();
+                Console.Write(Helper.cityString + city.GetStringPlace() + Helper.cityLastString);
+                
                 Thread.Sleep(500);
             }
 
