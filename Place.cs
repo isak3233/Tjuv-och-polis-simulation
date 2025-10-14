@@ -108,6 +108,23 @@ namespace ToPSimulation
         {
 
         }
+        public List<string>DetectCollisionAndApplyAction()
+        {
+            List<string> collisionEvent = new List<string>();
+            for(int i = 0; i < People.Count; i++)
+            {
+                for(int j = i + 1; j < People.Count; j++)
+                {
+                    Person person1 = People[i];
+                    Person person2 = People[j];
+                    if(person1.XPos == person2.XPos &&  person1.YPos == person2.YPos)
+                    {
+                        collisionEvent.Add(person1.PersonInteract(person2));
+                    }
+                }
+            }
+            return collisionEvent;
+        }
 
     }
     public class Prison : Place //skapar subklassen Prison
