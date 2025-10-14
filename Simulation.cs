@@ -12,15 +12,14 @@ namespace ToPSimulation
         {
             int xSize = 100;
             int ySize = 25;
-            City city = new City(Helper.GeneratePeople(10, 5, 3, xSize, ySize), xSize, ySize);
+            List<Person> people = Helper.GeneratePeople(10, 5, 3, xSize, ySize);
+            City city = new City(people, xSize, ySize);
             
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("=== CITY  ==============================================================================================");
-                Console.Write(city.GetStringPlace());
+                Console.Write(Helper.cityString + city.GetStringPlace() + Helper.cityLastString);
                 city.MovePeople();
-                Console.WriteLine("========================================================================================================");
                 Thread.Sleep(500);
             }
 
