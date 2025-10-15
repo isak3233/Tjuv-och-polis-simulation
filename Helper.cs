@@ -9,7 +9,8 @@ namespace ToPSimulation
     public class Helper
     {
         static public string cityString = "=== CITY  ==============================================================================================\n";
-        static public string cityLastString = "========================================================================================================\n";
+        //static public string cityLastString = "========================================================================================================\n";
+        static public string newsString = "=== NEWS FEED ==========================================================================================\n";
         static private string[] listOfNames = { //Lista med namn
             "Andersson",
             "Johansson",
