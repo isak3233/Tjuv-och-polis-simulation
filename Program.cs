@@ -5,6 +5,7 @@
         static void Main(string[] args) //skapar en ny simulation
         {
             Simulation simulation = new Simulation();
+            simulation.BeginSimulation();
         }
     }
 }

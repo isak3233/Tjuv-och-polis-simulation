@@ -104,13 +104,20 @@ namespace ToPSimulation
     }
     public class City : Place //skapar subklassen City
     {
+        public NewsFeed NewsFeed { get; set; }
+
         public City(List<Person> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
         {
-
+            NewsFeed = new NewsFeed();
         }
-        public List<string>DetectCollisionAndApplyAction()
+        public void WriteOutCity()
         {
-            List<string> collisionEvent = new List<string>();
+            Console.Write(Helper.cityString + this.GetStringPlace());
+        }
+        public int DetectCollisionAndApplyAction()
+        {
+            List<string> collisionEvents = new List<string>();
+            int amountOfEvents = 0;
             for(int i = 0; i < People.Count; i++)
             {
                 for(int j = i + 1; j < People.Count; j++)
@@ -119,11 +126,18 @@ namespace ToPSimulation
                     Person person2 = People[j];
                     if(person1.XPos == person2.XPos &&  person1.YPos == person2.YPos)
                     {
-                        collisionEvent.Add(person1.PersonInteract(person2));
+                        string collisionEvent = person1.PersonInteract(person2);
+                        if(collisionEvent != "")
+                        {
+                            collisionEvents.Add(collisionEvent);
+                            amountOfEvents++;
+                        }
+                        
                     }
                 }
             }
-            return collisionEvent;
+            NewsFeed.News.AddRange(collisionEvents);
+            return amountOfEvents;
         }
 
     }

@@ -8,46 +8,43 @@ namespace ToPSimulation
 {
     public class Simulation
     {
+        private City City;
+
         public Simulation() //Konstruktor för simulation
         {
             int xSize = 100;
             int ySize = 25;
             List<Person> people = Helper.GeneratePeople(10, 5, 10, xSize, ySize);
-            NewsFeed newsFeed = new NewsFeed();
-
-            City city = new City(people, xSize, ySize);
+            City = new City(people, xSize, ySize);        
+        }
+        public void BeginSimulation ()
+        {
             while (true)
             {
                 Console.Clear();
-                city.MovePeople();
-                
-                Console.Write(Helper.cityString + city.GetStringPlace());
 
 
-                List<string> collisionEvent = city.DetectCollisionAndApplyAction();
-                newsFeed.News.AddRange(collisionEvent);
-                Console.Write(Helper.newsString);
-                newsFeed.PrintNews();
+                City.MovePeople();
 
-                if (collisionEvent.Count > 0)
+                int amountOfEvents = City.DetectCollisionAndApplyAction();
+                Console.WriteLine(amountOfEvents);
+
+
+                City.WriteOutCity();
+                City.NewsFeed.WriteOutNews();
+
+                if (amountOfEvents > 0)
                 {
-                    
-                    
-                    
                     Thread.Sleep(2000);
-
-                } 
+                }
                 else
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(50);
                 }
-                
+
 
 
             }
-            
-         
-
         }
     }
 }

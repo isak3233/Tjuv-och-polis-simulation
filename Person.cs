@@ -43,7 +43,7 @@ namespace ToPSimulation
                 collisionEventString = personCollidedWith.PersonInteract(this);
             } else if (personCollidedWith is Police)
             {
-                collisionEventString = $"Konstapeln {this.Name} hälsade på konstapeln {personCollidedWith.Name}";
+                //collisionEventString = $"Konstapeln {this.Name} hälsade på konstapeln {personCollidedWith.Name}";
             }
                 return collisionEventString;
         }
@@ -69,16 +69,23 @@ namespace ToPSimulation
             }
             else if(personCollidedWith is Civil)
             {
-                collisionEventString = $"Medborgaren {this.Name} hälsar på medborgaren {personCollidedWith.Name}";
+                //collisionEventString = $"Medborgaren {this.Name} hälsar på medborgaren {personCollidedWith.Name}";
             }
             else if (personCollidedWith is Thief)
             {
-                int randomItemIndex = Random.Shared.Next(0, this.Belongings.Count);
-                Item randomItem = Belongings[randomItemIndex];
-                Thief thief = (Thief)personCollidedWith;
-                thief.Stolen.Add(randomItem);
-                collisionEventString = $"{personCollidedWith.Name} stal {randomItem.ItemName} från medborgaren {this.Name}";
-                this.Belongings.RemoveAt(randomItemIndex);
+                if(Belongings.Count <= 0)
+                {
+                    collisionEventString = $"{personCollidedWith.Name} försökte ta saker från medborgaren {this.Name} men hen hade inget";
+                } else
+                {
+                    int randomItemIndex = Random.Shared.Next(0, this.Belongings.Count);
+                    Item randomItem = Belongings[randomItemIndex];
+                    Thief thief = (Thief)personCollidedWith;
+                    thief.Stolen.Add(randomItem);
+                    collisionEventString = $"{personCollidedWith.Name} stal {randomItem.ItemName} från medborgaren {this.Name}";
+                    this.Belongings.RemoveAt(randomItemIndex);
+                }
+                    
                 
             }
             return collisionEventString;
@@ -112,7 +119,7 @@ namespace ToPSimulation
             }
             if(personCollidedWith is Thief)
             {
-                collisionEventString = $"Tjuven {this.Name} träffade tjuven {personCollidedWith.Name}";
+                //collisionEventString = $"Tjuven {this.Name} träffade tjuven {personCollidedWith.Name}";
             }
             return collisionEventString;
         }

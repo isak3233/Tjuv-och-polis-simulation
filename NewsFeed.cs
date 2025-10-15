@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToPSimulation
 {
-    internal class NewsFeed
+    public class NewsFeed
     {
 
         public List<string> News { get; set; }
@@ -16,28 +16,28 @@ namespace ToPSimulation
             News = new List<string>();
         }
 
-        public List<string> LatestNews()
+        public List<string> LatestNews(int amountOfNews)
         {
-            List<string> latestNews = new List<string>();
-            int latestSevenNews = News.Count - 8;
-            if (latestSevenNews < 0 )
+            List<string> latestNewsToGet = new List<string>();
+            int latestNews = News.Count - (amountOfNews + 1);
+            if (latestNews < 0 )
             {
-                latestSevenNews = 0; 
+                latestNews = 0; 
             }
-            for (int i = News.Count - 1; i > latestSevenNews; i--)
+            for (int i = News.Count - 1; i >= latestNews; i--)
             {
-                latestNews.Add(i + ": " + News[i]);
+                latestNewsToGet.Add((i + 1) + ": " + News[i]);
 
             }
 
-            return latestNews;
+            return latestNewsToGet;
         }
 
 
-        public void PrintNews()
+        public void WriteOutNews()
         {
-            List<string> latestNews = LatestNews();
-            
+            List<string> latestNews = LatestNews(7);
+            Console.Write(Helper.newsString);
             foreach (string news in latestNews)
             {
                 Console.WriteLine(news);
