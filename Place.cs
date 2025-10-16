@@ -134,11 +134,15 @@ namespace ToPSimulation
                     Person person2 = People[j];
                     int person1NewXPos = person1.XPos + person1.Directions[0];
                     int person1NewYPos = person1.YPos + person1.Directions[1];
+                    int person2NewXPos = person2.XPos + person2.Directions[0];
+                    int person2NewYPos = person2.YPos + person2.Directions[1];
 
-                    
 
+                    // Dom två första if satserna kollar om personerna har gått igenom varandra (En kollsion har hänt) 
+                    // Den sista kollar om personerna är i varandra (En kollison har hänt)
                     if ( 
-                        (person1NewXPos == person2.XPos && person1NewYPos == person2.YPos) ||
+                        (person1NewXPos == person2.XPos && person1NewYPos == person2.YPos) && 
+                        (person2NewXPos == person1.XPos && person2NewYPos == person1.YPos) ||
                         (person1.XPos == person2.XPos && person1.YPos == person2.YPos)
                         )
                     {

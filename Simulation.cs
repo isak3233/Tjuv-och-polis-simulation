@@ -15,8 +15,14 @@ namespace ToPSimulation
         {
             int xSize = 100;
             int ySize = 25;
-            List<Person> people = Helper.GeneratePeople(10, 10, 10, xSize, ySize);
-
+            //List<Person> people = Helper.GeneratePeople(10, 10, 10, xSize, ySize);
+            int[] dir = { -1, 0 };
+            int[] dir1 = { 0, 1 };
+            int[] dir2 = { -1, 0 };
+            List<Person> people = new List<Person>();
+            people.Add(new Police("Kalle1", 7, 3, dir1));
+            people.Add(new Thief("Kalle2", 20, 1, dir2));
+            people.Add(new Civil("Kalle3", 10, 5, dir));
 
 
             City = new City(people, xSize, ySize);
@@ -56,13 +62,13 @@ namespace ToPSimulation
 
                 if (amountOfEvents > 0)
                 {
-                    Thread.Sleep(2000);
+                    //Thread.Sleep(2000);
                 }
                 else
                 {
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
                 }
-
+                Console.ReadLine();
 
 
 
