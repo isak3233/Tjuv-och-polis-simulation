@@ -26,6 +26,8 @@ namespace ToPSimulation
         {
             while (true)
             {
+                // Gör så att vi kan se i newsfeed när en person lämnar fängelset
+                // Testa alla olika riktingar så att vår kollsion funkar rätt
                 Console.Clear();
                 
                 City.MovePeople();
