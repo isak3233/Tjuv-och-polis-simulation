@@ -8,7 +8,15 @@ namespace ToPSimulation
 {
     public class Helper
     {
+        //int[] dir = { 1, 0 };
+        //int[] dir1 = { 0, 0 };
+        //int[] dir2 = { -1, 0 };
+        //List<Person> people = new List<Person>();
+        //people.Add(new Civil("Kalle1", 10, 1, dir1));
+        //    people.Add(new Thief("Kalle2", 20, 1, dir2));
+        //    people.Add(new Police("Kalle3", 5, 1, dir));
         static public string cityString = "=== CITY  ==============================================================================================\n";
+        static public string prisonString = "=== PRISON  ============================================================================================\n";
         static public string statusString = "=== STATUS =============================================================================================";
         static public string newsString = "=== NEWS FEED ==========================================================================================\n";
         static private string[] listOfNames = { //Lista med namn

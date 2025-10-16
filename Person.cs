@@ -94,6 +94,9 @@ namespace ToPSimulation
     public class Thief : Person //Skapar subklassen Tjuv
     {
         public List<Item> Stolen { get; set; }
+        public bool TakenByPolice = false;
+        public int TimeInPrison = 0;
+
         public Thief(string name, int xPos, int yPos, int[] directions) : base(name, xPos, yPos, directions)
         {
             Stolen = new List<Item>();
@@ -108,10 +111,12 @@ namespace ToPSimulation
             {
                 if(this.Stolen.Count > 0)
                 {
+                    TimeInPrison = 10 * this.Stolen.Count;
                     Police police = (Police)personCollidedWith;
                     police.Confiscated.AddRange(this.Stolen);
                     this.Stolen.Clear();
                     collisionEventString = $"Tjuven {this.Name} blev tagen av polisen {police.Name} och tog alla hans stulna saker";
+                    TakenByPolice = true;
                 } else
                 {
                     collisionEventString = $"Tjuven {this.Name} träffade polisen {personCollidedWith.Name}. Men har inte stulit något";

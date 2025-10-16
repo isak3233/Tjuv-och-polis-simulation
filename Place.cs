@@ -61,7 +61,7 @@ namespace ToPSimulation
             
         }
         
-        public void MovePeople()
+        public virtual void MovePeople()
         {
             foreach (Person person in People)
             {
@@ -98,6 +98,17 @@ namespace ToPSimulation
             }
             UpdateArea();
         }
+        public void AddPeopleToPlace(List<Person> peopleToAdd)
+        {
+            People.AddRange(peopleToAdd);
+        }
+        public void RemovePeopleFromPlace(List<Person> peopleToRemove)
+        {
+            for(int i = 0; i < peopleToRemove.Count; i++)
+            {
+                People.Remove(peopleToRemove[i]);
+            }
+        }
     }
     public class City : Place //skapar subklassen City
     {
@@ -121,8 +132,17 @@ namespace ToPSimulation
                 {
                     Person person1 = People[i];
                     Person person2 = People[j];
-                    if(person1.XPos == person2.XPos &&  person1.YPos == person2.YPos)
+                    int person1NewXPos = person1.XPos + person1.Directions[0];
+                    int person1NewYPos = person1.YPos + person1.Directions[1];
+
+                    
+
+                    if ( 
+                        (person1NewXPos == person2.XPos && person1NewYPos == person2.YPos) ||
+                        (person1.XPos == person2.XPos && person1.YPos == person2.YPos)
+                        )
                     {
+                        
                         string collisionEvent = person1.PersonInteract(person2);
                         if(collisionEvent != "")
                         {
@@ -136,12 +156,111 @@ namespace ToPSimulation
             NewsFeed.News.AddRange(collisionEvents);
             return amountOfEvents;
         }
+        public List<Person> GetThiefsTaken()
+        {
+            List<Person> theifsTaken = new List<Person>();
+            for(int i = 0; i < People.Count;i++)
+            {
+                Person person = People[i];
+                
+                if(person is Thief)
+                {
+                    Thief thief = (Thief)person;
+                    if(thief.TakenByPolice)
+                    {
+                        theifsTaken.Add(person);
+
+                    }
+                }
+                
+            }
+            return theifsTaken;
+        }
+        
+        
     }
     public class Prison : Place //skapar subklassen Prison
     {
         public Prison(List<Person> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
         {
 
+        }
+        public void WriteOutPrison()
+        {
+            Console.Write(Helper.prisonString + this.GetStringPlace());
+        }
+        public void AddPrisoners(List<Person> thiefs)
+        {
+            
+            
+            People.AddRange(thiefs);
+        }
+        public override void MovePeople()
+        {
+            foreach (Person person in People)
+            {
+                if (person.XPos + person.Directions[0] >= 0 && person.XPos + person.Directions[0] <= Area.GetLength(1) - 1)
+                {
+                    person.XPos += person.Directions[0];
+                }
+                else
+                {
+                    if (!(person.XPos + person.Directions[0] >= 0))
+                    {
+                        person.XPos = Area.GetLength(1) - 1;
+                    }
+                    else if (!(person.XPos + person.Directions[0] <= Area.GetLength(1) - 1))
+                    {
+                        person.XPos = 0;
+                    }
+                }
+                if (person.YPos + person.Directions[1] >= 0 && person.YPos + person.Directions[1] <= Area.GetLength(0) - 1)
+                {
+                    person.YPos += person.Directions[1];
+                }
+                else
+                {
+                    if (!(person.YPos + person.Directions[1] >= 0))
+                    {
+                        person.YPos = Area.GetLength(0) - 1;
+                    }
+                    else if (!(person.YPos + person.Directions[1] <= Area.GetLength(0) - 1))
+                    {
+                        person.YPos = 0;
+                    }
+                }
+            }
+            UpdateArea();
+            for (int i = 0; i < People.Count;i++)
+            {
+                Person person = People[i];
+                if(person is Thief)
+                {
+                    Thief thief = (Thief)person;
+                    thief.TimeInPrison--;
+                }
+                
+            }
+
+        }
+        public List<Person> GetReleasedThiefs()
+        {
+            List<Person> PrisonersToRelease = new List<Person>();
+            for (int i = 0; i < People.Count; i++)
+            {
+                Person person = People[i];
+                if (person is Thief)
+                {
+                    Thief thief = (Thief)person;
+                    if(thief.TimeInPrison <= 0)
+                    {
+                        PrisonersToRelease.Add(person);
+
+                    }
+                }
+
+            }
+            return PrisonersToRelease;
         }
     }
 
