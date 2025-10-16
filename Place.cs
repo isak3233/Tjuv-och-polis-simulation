@@ -193,12 +193,7 @@ namespace ToPSimulation
         {
             Console.Write(Helper.prisonString + this.GetStringPlace());
         }
-        public void AddPrisoners(List<Person> thiefs)
-        {
-            
-            
-            People.AddRange(thiefs);
-        }
+       
         public override void MovePeople()
         {
             foreach (Person person in People)
@@ -258,6 +253,7 @@ namespace ToPSimulation
                     Thief thief = (Thief)person;
                     if(thief.TimeInPrison <= 0)
                     {
+                        thief.TakenByPolice = false;
                         PrisonersToRelease.Add(person);
 
                     }

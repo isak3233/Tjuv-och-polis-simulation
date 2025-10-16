@@ -40,7 +40,7 @@ namespace ToPSimulation
                 int amountOfEvents = City.DetectCollisionAndApplyAction();
 
                 List<Person> newPrisoners = City.GetThiefsTaken();
-                Prison.AddPrisoners(newPrisoners);
+                Prison.AddPeopleToPlace(newPrisoners);
                 City.RemovePeopleFromPlace(newPrisoners);
 
                 List<Person> prisonersToRelease = Prison.GetReleasedThiefs();
