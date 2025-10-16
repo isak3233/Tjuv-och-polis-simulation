@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ToPSimulation
 {
     public class Place //skapar klassen Place
-    {
+    {   
         public List<Person> People { get; set; }
         public Person[,] Area { get; set; }
         public Place(List<Person> people, int sizeX, int sizeY) //skapar en instans av klassen place 
@@ -43,7 +43,6 @@ namespace ToPSimulation
                         {
                             returnString += "\u001b[31mT\u001b[0m";
                         } 
-
                     }
                 }
 
@@ -97,8 +96,6 @@ namespace ToPSimulation
                     }
                 }
             }
-
-            
             UpdateArea();
         }
     }
@@ -139,7 +136,6 @@ namespace ToPSimulation
             NewsFeed.News.AddRange(collisionEvents);
             return amountOfEvents;
         }
-
     }
     public class Prison : Place //skapar subklassen Prison
     {

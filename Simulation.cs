@@ -22,15 +22,13 @@ namespace ToPSimulation
             while (true)
             {
                 Console.Clear();
-
-
+                
                 City.MovePeople();
 
                 int amountOfEvents = City.DetectCollisionAndApplyAction();
-                Console.WriteLine(amountOfEvents);
-
-
+                
                 City.WriteOutCity();
+                StatusFeed.WriteStatus(City.People);
                 City.NewsFeed.WriteOutNews();
 
                 if (amountOfEvents > 0)
@@ -39,7 +37,7 @@ namespace ToPSimulation
                 }
                 else
                 {
-                    Thread.Sleep(50);
+                    Thread.Sleep(500);
                 }
 
 
