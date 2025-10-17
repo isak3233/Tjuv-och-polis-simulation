@@ -2,30 +2,29 @@ namespace ToPSimulation;
 
 public class StatusFeed
 {
-    public static void WriteStatus(List<Person> persons)
+
+    public int StartingAmountThief { get; set; }
+    public int StartingAmountCivil { get; set; }
+    public int StartingAmountPolice { get; set; }
+    public StatusFeed(int startingAmountThief, int startingAmountPolice, int startingAmountCivil)
     {
-        int amountOfPolice = 0;
+        StartingAmountThief = startingAmountThief;
+        StartingAmountPolice = startingAmountPolice;
+        StartingAmountCivil = startingAmountCivil;
+    }
+    public void WriteStatus(List<Person> persons)
+    {
         int amountOfThief = 0;
-        int amountOfCitizen = 0;
-        
         foreach (Person person in persons)
         {
-            if (person is Police)
-            {
-                amountOfPolice++;
-            }
             if (person is Thief)
             {
                 amountOfThief++;
             }
-            if (person is Civil)
-            {
-                amountOfCitizen++;
-            }
         }
         Console.WriteLine(Helper.statusString);
-        Console.WriteLine($"Av {amountOfThief} tjuvar är det nu (FIXA SENARE) kvar");
-        Console.WriteLine($"Av {amountOfCitizen} medborgare är det nu {amountOfCitizen} kvar");
-        Console.WriteLine($"Av {amountOfPolice} poliser är det nu {amountOfPolice} kvar");
+        Console.WriteLine($"Av {StartingAmountThief} tjuvar är det nu {amountOfThief} kvar");
+        Console.WriteLine($"Av {StartingAmountCivil} medborgare är det nu {StartingAmountCivil} kvar");
+        Console.WriteLine($"Av {StartingAmountPolice} poliser är det nu {StartingAmountPolice} kvar");
     }
 }

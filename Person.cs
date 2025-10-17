@@ -82,7 +82,7 @@ namespace ToPSimulation
                     Item randomItem = Belongings[randomItemIndex];
                     Thief thief = (Thief)personCollidedWith;
                     thief.Stolen.Add(randomItem);
-                    collisionEventString = $"{personCollidedWith.Name} stal {randomItem.ItemName} från medborgaren {this.Name}";
+                    collisionEventString = $"Tjuven {personCollidedWith.Name} stal {randomItem.ItemName} från medborgaren {this.Name}";
                     this.Belongings.RemoveAt(randomItemIndex);
                 }
                     

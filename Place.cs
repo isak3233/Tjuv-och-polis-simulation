@@ -60,7 +60,29 @@ namespace ToPSimulation
             }
             
         }
-        
+        public int[] GetUniquePosition()
+        {
+            //Skapar en slumpmässig position
+            int randomXPos = Random.Shared.Next(0, Area.GetLength(1));
+            int randomYPos = Random.Shared.Next(0, Area.GetLength(0));
+
+            while (true)
+            {
+                //Kollar om den positionen är tagen
+                if (Area[randomYPos, randomXPos] == null)
+                {
+                    return new int[] { randomXPos, randomYPos };
+                }
+                else //Skapar en ny position om den är tagen
+                {
+                     randomXPos = Random.Shared.Next(0, Area.GetLength(1));
+                     randomYPos = Random.Shared.Next(0, Area.GetLength(0));
+                }
+
+            }
+
+
+        }
         public virtual void MovePeople()
         {
             foreach (Person person in People)
