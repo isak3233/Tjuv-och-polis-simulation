@@ -62,7 +62,6 @@ namespace ToPSimulation
 
                 }
 
-
                 Prison.RemovePeopleFromPlace(prisonersToRelease);
 
 

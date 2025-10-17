@@ -218,40 +218,7 @@ namespace ToPSimulation
        
         public override void MovePeople()
         {
-            foreach (Person person in People)
-            {
-                if (person.XPos + person.Directions[0] >= 0 && person.XPos + person.Directions[0] <= Area.GetLength(1) - 1)
-                {
-                    person.XPos += person.Directions[0];
-                }
-                else
-                {
-                    if (!(person.XPos + person.Directions[0] >= 0))
-                    {
-                        person.XPos = Area.GetLength(1) - 1;
-                    }
-                    else if (!(person.XPos + person.Directions[0] <= Area.GetLength(1) - 1))
-                    {
-                        person.XPos = 0;
-                    }
-                }
-                if (person.YPos + person.Directions[1] >= 0 && person.YPos + person.Directions[1] <= Area.GetLength(0) - 1)
-                {
-                    person.YPos += person.Directions[1];
-                }
-                else
-                {
-                    if (!(person.YPos + person.Directions[1] >= 0))
-                    {
-                        person.YPos = Area.GetLength(0) - 1;
-                    }
-                    else if (!(person.YPos + person.Directions[1] <= Area.GetLength(0) - 1))
-                    {
-                        person.YPos = 0;
-                    }
-                }
-            }
-            UpdateArea();
+            base.MovePeople();
             for (int i = 0; i < People.Count;i++)
             {
                 Person person = People[i];
