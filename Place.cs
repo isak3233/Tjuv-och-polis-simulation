@@ -258,6 +258,7 @@ namespace ToPSimulation
                 if(person is Thief)
                 {
                     Thief thief = (Thief)person;
+                    
                     thief.TimeInPrison--;
                 }
                 

@@ -15,24 +15,19 @@ namespace ToPSimulation
 
         public Simulation() //Konstruktor för simulation
         {
-            int xSize = 100;
-            int ySize = 25;
+            int cityXSize = 100;
+            int cityYSize = 25;
+            int prisonXSize = 10;
+            int prisonYSize = 10;
             int amountOfThiefs = 20;
             int amountOfCivils = 30;
             int amountOfPolice = 10;
 
-            List<Person> people = Helper.GeneratePeople(amountOfCivils, amountOfPolice, amountOfThiefs, xSize, ySize);
-            //int[] dir = { 1, 0 };
-            //int[] dir1 = { 0, 0 };
-            //int[] dir2 = { -1, 0 };
-            //List<Person> people = new List<Person>();
-            //people.Add(new Police("Kalle1", 5, 0, dir));
-            //people.Add(new Thief("Kalle2", 20, 0, dir2));
-            //people.Add(new Civil("Kalle3", 10, 0, dir1));
+            List<Person> people = Helper.GeneratePeople(amountOfCivils, amountOfPolice, amountOfThiefs, cityXSize, cityYSize);
 
 
-            City = new City(people, xSize, ySize);
-            Prison = new Prison(new List<Person>(), 10, 10);
+            City = new City(people, cityXSize, cityYSize);
+            Prison = new Prison(new List<Person>(), prisonXSize, prisonYSize);
             StatusFeed = new StatusFeed(amountOfThiefs, amountOfPolice, amountOfCivils);
         }
 
@@ -42,8 +37,7 @@ namespace ToPSimulation
 
             while (true)
             {
-                // Gör så att vi kan se i newsfeed när en person lämnar fängelset
-                // Testa alla olika riktingar så att vår kollsion funkar rätt
+
                 Console.Clear();
                 
                 City.MovePeople();
@@ -54,6 +48,7 @@ namespace ToPSimulation
                 City.RemovePeopleFromPlace(newPrisoners);
 
                 List<Person> prisonersToRelease = Prison.GetReleasedThiefs();
+
                 for (int i = 0; i < prisonersToRelease.Count; i++) 
                 {
                     int[] newPosition = City.GetUniquePosition();
@@ -62,13 +57,13 @@ namespace ToPSimulation
                     prisonersToRelease[i].YPos = newPosition[1];
                     List<Person> tempList = new List<Person>();
                     tempList.Add(prisonersToRelease[i]);
-                    //City.AddPeopleToPlace(tempList);
+                    City.AddPeopleToPlace(tempList);
                     City.UpdateArea();
 
                 }
-                // Gör så att tjuvarna får en ny position i staden innan vi lägger in dom
 
-                //Prison.RemovePeopleFromPlace(prisonersToRelease);
+
+                Prison.RemovePeopleFromPlace(prisonersToRelease);
 
 
                 Prison.MovePeople();
@@ -84,13 +79,13 @@ namespace ToPSimulation
 
                 if (amountOfEvents > 0)
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(2000);
                 }
                 else
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(500);
                 }
-                //Console.ReadLine();
+
 
 
 
