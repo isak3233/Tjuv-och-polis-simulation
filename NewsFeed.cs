@@ -19,7 +19,7 @@ namespace ToPSimulation
         public List<string> LatestNews(int amountOfNews)
         {
             List<string> latestNewsToGet = new List<string>();
-            int latestNews = News.Count - (amountOfNews + 1);
+            int latestNews = News.Count - amountOfNews;
             if (latestNews < 0 )
             {
                 latestNews = 0; 

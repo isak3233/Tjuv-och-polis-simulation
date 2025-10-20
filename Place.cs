@@ -144,6 +144,22 @@ namespace ToPSimulation
         {
             Console.Write(Helper.cityString + this.GetStringPlace());
         }
+        public void AddPeopleToRandomPosition(List<Person> peopleToAdd)
+        {
+            for (int i = 0; i < peopleToAdd.Count; i++)
+            {
+                int[] newPosition = GetUniquePosition();
+
+                peopleToAdd[i].XPos = newPosition[0];
+                peopleToAdd[i].YPos = newPosition[1];
+                List<Person> tempList = new List<Person>();
+                tempList.Add(peopleToAdd[i]);
+                AddPeopleToPlace(tempList);
+                UpdateArea();
+
+            }
+        }
+
         public int DetectCollisionAndApplyAction()
         {
             List<string> collisionEvents = new List<string>();

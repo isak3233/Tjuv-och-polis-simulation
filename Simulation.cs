@@ -39,7 +39,8 @@ namespace ToPSimulation
             {
 
                 Console.Clear();
-                
+
+
                 City.MovePeople();
                 int amountOfEvents = City.DetectCollisionAndApplyAction();
 
@@ -49,19 +50,7 @@ namespace ToPSimulation
 
                 List<Person> prisonersToRelease = Prison.GetReleasedThiefs();
 
-                for (int i = 0; i < prisonersToRelease.Count; i++) 
-                {
-                    int[] newPosition = City.GetUniquePosition();
-
-                    prisonersToRelease[i].XPos = newPosition[0];
-                    prisonersToRelease[i].YPos = newPosition[1];
-                    List<Person> tempList = new List<Person>();
-                    tempList.Add(prisonersToRelease[i]);
-                    City.AddPeopleToPlace(tempList);
-                    City.UpdateArea();
-
-                }
-
+                City.AddPeopleToRandomPosition(prisonersToRelease);
                 Prison.RemovePeopleFromPlace(prisonersToRelease);
 
 
