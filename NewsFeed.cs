@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,39 +10,41 @@ namespace ToPSimulation
     public class NewsFeed
     {
 
-        public List<string> News { get; set; }
-
+        public Queue<string> News { get; set; }
+        private int newsIndex = 0;
         public NewsFeed()
         {
-            News = new List<string>();
-        }
-
-        public List<string> LatestNews(int amountOfNews)
+            News = new Queue<string>();
+        }   
+        
+        public void AddNews(List<string> newsToAdd)
         {
-            List<string> latestNewsToGet = new List<string>();
-            int latestNews = News.Count - amountOfNews;
-            if (latestNews < 0 )
+            foreach(string news in newsToAdd)
             {
-                latestNews = 0; 
+                News.Enqueue(news);
+                newsIndex++;
             }
-            for (int i = News.Count - 1; i >= latestNews; i--)
+            while(true)
             {
-                latestNewsToGet.Add((i + 1) + ": " + News[i]);
-
+                if(News.Count > 7)
+                {
+                    News.Dequeue();
+                } else
+                {
+                    break;
+                }
             }
-
-            return latestNewsToGet;
         }
 
 
         public void WriteOutNews()
         {
-            List<string> latestNews = LatestNews(7);
             Console.Write(Helper.newsString);
-            foreach (string news in latestNews)
+            int index = 0;
+            foreach (string news in News)
             {
-                Console.WriteLine(news);
-               
+                Console.WriteLine($"{(newsIndex - index)}: {news}");
+                index++;
 
             }
         }

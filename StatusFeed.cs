@@ -3,9 +3,9 @@ namespace ToPSimulation;
 public class StatusFeed
 {
 
-    public int StartingAmountThief { get; set; }
-    public int StartingAmountCivil { get; set; }
-    public int StartingAmountPolice { get; set; }
+    private int StartingAmountThief { get;}
+    private int StartingAmountCivil { get;}
+    private int StartingAmountPolice { get;}
     public StatusFeed(int startingAmountThief, int startingAmountPolice, int startingAmountCivil)
     {
         StartingAmountThief = startingAmountThief;

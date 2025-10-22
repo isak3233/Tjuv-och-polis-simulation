@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace ToPSimulation
 {
     public class Place //skapar klassen Place
-    {   
+    {
         public List<Person> People { get; set; }
-        public Person[,] Area { get; set; }
+        private Person[,] Area { get; set; }
         public Place(List<Person> people, int sizeX, int sizeY) //skapar en instans av klassen place 
         {
             Area = new Person[sizeY, sizeX];
@@ -51,7 +51,7 @@ namespace ToPSimulation
             return returnString;
         }
 
-        public void UpdateArea()
+        protected void UpdateArea()
         {
             Area = new Person[Area.GetLength(0), Area.GetLength(1)];
             foreach (Person person in People)
@@ -60,7 +60,7 @@ namespace ToPSimulation
             }
             
         }
-        public int[] GetUniquePosition()
+        protected int[] GetUniquePosition()
         {
             //Skapar en slumpmässig position
             int randomXPos = Random.Shared.Next(0, Area.GetLength(1));
@@ -195,7 +195,7 @@ namespace ToPSimulation
                     }
                 }
             }
-            NewsFeed.News.AddRange(collisionEvents);
+            NewsFeed.AddNews(collisionEvents);
             return amountOfEvents;
         }
         public List<Person> GetThiefsTaken()
