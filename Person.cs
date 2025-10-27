@@ -73,10 +73,7 @@ namespace ToPSimulation
             }
             else if (personCollidedWith is Thief)
             {
-                if(Belongings.Count <= 0)
-                {
-                    collisionEventString = $"{personCollidedWith.Name} försökte ta saker från medborgaren {this.Name} men hen hade inget";
-                } else
+                if(Belongings.Count > 0)
                 {
                     int randomItemIndex = Random.Shared.Next(0, this.Belongings.Count);
                     Item randomItem = Belongings[randomItemIndex];
@@ -84,6 +81,9 @@ namespace ToPSimulation
                     thief.Stolen.Add(randomItem);
                     collisionEventString = $"Tjuven {personCollidedWith.Name} stal {randomItem.ItemName} från medborgaren {this.Name}";
                     this.Belongings.RemoveAt(randomItemIndex);
+                } else
+                {
+                    collisionEventString = $"{personCollidedWith.Name} försökte ta saker från medborgaren {this.Name} men hen hade inget";
                 }
                     
                 
