@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ToPSimulation
 {
-    public class Place //skapar klassen Place
+    public abstract class Place //skapar klassen Place
     {
-        public List<Person> People { get; set; }
-        private Person[,] Area { get; set; }
-        public Place(List<Person> people, int sizeX, int sizeY) //skapar en instans av klassen place 
+        public List<IPerson> People { get; set; }
+        private IPerson[,] Area { get; set; }
+        public Place(List<IPerson> people, int sizeX, int sizeY) //skapar en instans av klassen place 
         {
-            Area = new Person[sizeY, sizeX];
+            Area = new IPerson[sizeY, sizeX];
             People = people;
             
             UpdateArea();
@@ -25,7 +25,7 @@ namespace ToPSimulation
                 returnString += "||";
                 for (int j = 0; j < Area.GetLength(1); j++)
                 {
-                    Person person = Area[i, j];
+                    IPerson person = Area[i, j];
                     if(person == null)
                     {
                         returnString += " ";
@@ -53,8 +53,8 @@ namespace ToPSimulation
 
         protected void UpdateArea()
         {
-            Area = new Person[Area.GetLength(0), Area.GetLength(1)];
-            foreach (Person person in People)
+            Area = new IPerson[Area.GetLength(0), Area.GetLength(1)];
+            foreach (IPerson person in People)
             {
                 Area[person.YPos, person.XPos] = person;
             }
@@ -85,7 +85,7 @@ namespace ToPSimulation
         }
         public virtual void MovePeople()
         {
-            foreach (Person person in People)
+            foreach (IPerson person in People)
             {
                 if (person.XPos + person.Directions[0] >= 0 && person.XPos + person.Directions[0] <= Area.GetLength(1) - 1)
                 {
@@ -120,11 +120,11 @@ namespace ToPSimulation
             }
             UpdateArea();
         }
-        public void AddPeopleToPlace(List<Person> peopleToAdd)
+        public void AddPeopleToPlace(List<IPerson> peopleToAdd)
         {
             People.AddRange(peopleToAdd);
         }
-        public void RemovePeopleFromPlace(List<Person> peopleToRemove)
+        public void RemovePeopleFromPlace(List<IPerson> peopleToRemove)
         {
             for(int i = 0; i < peopleToRemove.Count; i++)
             {
@@ -136,7 +136,7 @@ namespace ToPSimulation
     {
         public NewsFeed NewsFeed { get; set; }
 
-        public City(List<Person> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
+        public City(List<IPerson> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
         {
             NewsFeed = new NewsFeed();
         }
@@ -144,7 +144,7 @@ namespace ToPSimulation
         {
             Console.Write(Helper.cityString + this.GetStringPlace());
         }
-        public void AddPeopleToRandomPosition(List<Person> peopleToAdd)
+        public void AddPeopleToRandomPosition(List<IPerson> peopleToAdd)
         {
             for (int i = 0; i < peopleToAdd.Count; i++)
             {
@@ -152,7 +152,7 @@ namespace ToPSimulation
 
                 peopleToAdd[i].XPos = newPosition[0];
                 peopleToAdd[i].YPos = newPosition[1];
-                List<Person> tempList = new List<Person>();
+                List<IPerson> tempList = new List<IPerson>();
                 tempList.Add(peopleToAdd[i]);
                 AddPeopleToPlace(tempList);
                 UpdateArea();
@@ -168,8 +168,8 @@ namespace ToPSimulation
             {
                 for(int j = i + 1; j < People.Count; j++)
                 {
-                    Person person1 = People[i];
-                    Person person2 = People[j];
+                    IPerson person1 = People[i];
+                    IPerson person2 = People[j];
                     int person1NewXPos = person1.XPos + person1.Directions[0];
                     int person1NewYPos = person1.YPos + person1.Directions[1];
                     int person2NewXPos = person2.XPos + person2.Directions[0];
@@ -198,12 +198,12 @@ namespace ToPSimulation
             NewsFeed.AddNews(collisionEvents);
             return amountOfEvents;
         }
-        public List<Person> GetThiefsTaken()
+        public List<IPerson> GetThiefsTaken()
         {
-            List<Person> theifsTaken = new List<Person>();
+            List<IPerson> theifsTaken = new List<IPerson>();
             for(int i = 0; i < People.Count;i++)
             {
-                Person person = People[i];
+                IPerson person = People[i];
                 
                 if(person is Thief)
                 {
@@ -223,7 +223,7 @@ namespace ToPSimulation
     }
     public class Prison : Place //skapar subklassen Prison
     {
-        public Prison(List<Person> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
+        public Prison(List<IPerson> people, int sizeX, int sizeY) : base(people, sizeX, sizeY)
         {
 
         }
@@ -237,7 +237,7 @@ namespace ToPSimulation
             base.MovePeople();
             for (int i = 0; i < People.Count;i++)
             {
-                Person person = People[i];
+                IPerson person = People[i];
                 if(person is Thief)
                 {
                     Thief thief = (Thief)person;
@@ -248,12 +248,12 @@ namespace ToPSimulation
             }
 
         }
-        public List<Person> GetReleasedThiefs()
+        public List<IPerson> GetReleasedThiefs()
         {
-            List<Person> PrisonersToRelease = new List<Person>();
+            List<IPerson> PrisonersToRelease = new List<IPerson>();
             for (int i = 0; i < People.Count; i++)
             {
-                Person person = People[i];
+                IPerson person = People[i];
                 if (person is Thief)
                 {
                     Thief thief = (Thief)person;

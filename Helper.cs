@@ -82,10 +82,10 @@ namespace ToPSimulation
     "Hedström"
 
 };
-        static public List<Person> GeneratePeople(int civilAmount, int policeAmount, int thiefAmount, int xSize, int ySize) //Genererar personer med unika positioner, samt riktning
+        static public List<IPerson> GeneratePeople(int civilAmount, int policeAmount, int thiefAmount, int xSize, int ySize) //Genererar personer med unika positioner, samt riktning
         {
             int totalIndex = 0;
-            List<Person> listOfPeople = new List<Person>();
+            List<IPerson> listOfPeople = new List<IPerson>();
 
             for (int i = 0; i < civilAmount; i++) //civil
             {
@@ -111,9 +111,9 @@ namespace ToPSimulation
 
             return listOfPeople;
         }
-        static bool CheckIfPosistionTaken(List<Person> listOfPeople, int xPos, int yPos) //kollar om positionen är tagen
+        static bool CheckIfPosistionTaken(List<IPerson> listOfPeople, int xPos, int yPos) //kollar om positionen är tagen
         {
-            foreach(Person person in listOfPeople)
+            foreach(IPerson person in listOfPeople)
             {
                 if(person.XPos == xPos && person.YPos == yPos)
                 {
@@ -122,7 +122,7 @@ namespace ToPSimulation
             }
             return false;
         }
-        static int[] GetPosition(List<Person> listOfPeople, int xSize, int ySize) //genererar en unik position
+        static int[] GetPosition(List<IPerson> listOfPeople, int xSize, int ySize) //genererar en unik position
         {
             int randomXPos = Random.Shared.Next(0, xSize);
             int randomYPos = Random.Shared.Next(0, ySize);

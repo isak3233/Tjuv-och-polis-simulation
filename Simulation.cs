@@ -23,11 +23,11 @@ namespace ToPSimulation
             int amountOfCivils = 30;
             int amountOfPolice = 10;
 
-            List<Person> people = Helper.GeneratePeople(amountOfCivils, amountOfPolice, amountOfThiefs, cityXSize, cityYSize);
+            List<IPerson> people = Helper.GeneratePeople(amountOfCivils, amountOfPolice, amountOfThiefs, cityXSize, cityYSize);
 
 
             City = new City(people, cityXSize, cityYSize);
-            Prison = new Prison(new List<Person>(), prisonXSize, prisonYSize);
+            Prison = new Prison(new List<IPerson>(), prisonXSize, prisonYSize);
             StatusFeed = new StatusFeed(amountOfThiefs, amountOfPolice, amountOfCivils);
         }
 
@@ -44,11 +44,11 @@ namespace ToPSimulation
                 City.MovePeople();
                 int amountOfEvents = City.DetectCollisionAndApplyAction();
 
-                List<Person> newPrisoners = City.GetThiefsTaken();
+                List<IPerson> newPrisoners = City.GetThiefsTaken();
                 Prison.AddPeopleToPlace(newPrisoners);
                 City.RemovePeopleFromPlace(newPrisoners);
 
-                List<Person> prisonersToRelease = Prison.GetReleasedThiefs();
+                List<IPerson> prisonersToRelease = Prison.GetReleasedThiefs();
 
                 City.AddPeopleToRandomPosition(prisonersToRelease);
                 Prison.RemovePeopleFromPlace(prisonersToRelease);

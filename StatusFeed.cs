@@ -12,10 +12,10 @@ public class StatusFeed
         StartingAmountPolice = startingAmountPolice;
         StartingAmountCivil = startingAmountCivil;
     }
-    public void WriteStatus(List<Person> persons)
+    public void WriteStatus(List<IPerson> persons)
     {
         int amountOfThief = 0;
-        foreach (Person person in persons)
+        foreach (IPerson person in persons)
         {
             if (person is Thief)
             {
