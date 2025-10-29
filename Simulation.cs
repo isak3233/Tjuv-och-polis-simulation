@@ -25,7 +25,6 @@ namespace ToPSimulation
 
             List<IPerson> people = Helper.GeneratePeople(amountOfCivils, amountOfPolice, amountOfThiefs, cityXSize, cityYSize);
 
-
             City = new City(people, cityXSize, cityYSize);
             Prison = new Prison(new List<IPerson>(), prisonXSize, prisonYSize);
             StatusFeed = new StatusFeed(amountOfThiefs, amountOfPolice, amountOfCivils);
@@ -47,6 +46,7 @@ namespace ToPSimulation
                 List<IPerson> newPrisoners = City.GetThiefsTaken();
                 Prison.AddPeopleToPlace(newPrisoners);
                 City.RemovePeopleFromPlace(newPrisoners);
+                
 
                 List<IPerson> prisonersToRelease = Prison.GetReleasedThiefs();
 

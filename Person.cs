@@ -99,7 +99,7 @@ namespace ToPSimulation
         public int[] Directions { get; set; }
         public List<Item> Stolen { get; set; }
         public bool TakenByPolice = false;
-        public int TimeInPrison = 0;
+        public DateTime TimeInPrison;
 
         public Thief(string name, int xPos, int yPos, int[] directions)
         {
@@ -119,7 +119,8 @@ namespace ToPSimulation
             {
                 if(this.Stolen.Count > 0)
                 {
-                    TimeInPrison = 10 * this.Stolen.Count;
+                    TimeInPrison = DateTime.Now.AddSeconds(10 * this.Stolen.Count);
+
                     Police police = (Police)personCollidedWith;
                     police.Confiscated.AddRange(this.Stolen);
                     this.Stolen.Clear();

@@ -232,22 +232,7 @@ namespace ToPSimulation
             Console.Write(Helper.prisonString + this.GetStringPlace());
         }
        
-        public override void MovePeople()
-        {
-            base.MovePeople();
-            for (int i = 0; i < People.Count;i++)
-            {
-                IPerson person = People[i];
-                if(person is Thief)
-                {
-                    Thief thief = (Thief)person;
-                    
-                    thief.TimeInPrison--;
-                }
-                
-            }
-
-        }
+       
         public List<IPerson> GetReleasedThiefs()
         {
             List<IPerson> PrisonersToRelease = new List<IPerson>();
@@ -257,7 +242,7 @@ namespace ToPSimulation
                 if (person is Thief)
                 {
                     Thief thief = (Thief)person;
-                    if(thief.TimeInPrison <= 0)
+                    if((thief.TimeInPrison - DateTime.Now).Seconds <= 0)
                     {
                         thief.TakenByPolice = false;
                         PrisonersToRelease.Add(person);
