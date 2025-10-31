@@ -41,12 +41,18 @@ namespace ToPSimulation
         {
             Console.Write(Helper.newsString);
             int index = 0;
-            foreach (string news in News)
+            for (int i = News.Count - 1; i >= 0; i--)
             {
+                string news = News.ElementAt(i);
                 Console.WriteLine($"{(newsIndex - index)}: {news}");
                 index++;
-
             }
+            //foreach (string news in News)
+            //{
+            //    Console.WriteLine($"{(newsIndex - index)}: {news}");
+            //    index++;
+
+            //}
         }
     }
 }

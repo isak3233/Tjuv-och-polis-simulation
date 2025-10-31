@@ -19,7 +19,7 @@ namespace ToPSimulation
             int cityYSize = 25;
             int prisonXSize = 10;
             int prisonYSize = 10;
-            int amountOfThiefs = 20;
+            int amountOfThiefs = 10;
             int amountOfCivils = 30;
             int amountOfPolice = 10;
 
