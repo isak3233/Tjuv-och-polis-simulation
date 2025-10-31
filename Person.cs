@@ -8,7 +8,6 @@ using System.Xml.Linq;
 
 namespace ToPSimulation
 {
-   
     public class Police : IPerson //Skapar subklassen Polis
     {
         public string Name { get; set; }

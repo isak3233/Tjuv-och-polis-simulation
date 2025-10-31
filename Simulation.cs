@@ -13,15 +13,8 @@ namespace ToPSimulation
         private StatusFeed StatusFeed;
         private Prison Prison;
 
-        public Simulation() //Konstruktor för simulation
+        public Simulation(int cityXSize, int cityYSize, int prisonXSize, int prisonYSize, int amountOfThiefs, int amountOfCivils, int amountOfPolice) //Konstruktor för simulation
         {
-            int cityXSize = 100;
-            int cityYSize = 25;
-            int prisonXSize = 10;
-            int prisonYSize = 10;
-            int amountOfThiefs = 10;
-            int amountOfCivils = 30;
-            int amountOfPolice = 10;
 
             List<IPerson> people = Helper.GeneratePeople(amountOfCivils, amountOfPolice, amountOfThiefs, cityXSize, cityYSize);
 
@@ -32,13 +25,9 @@ namespace ToPSimulation
 
         public void BeginSimulation ()
         {
-
-
             while (true)
             {
-
                 Console.Clear();
-
 
                 City.MovePeople();
                 int amountOfEvents = City.DetectCollisionAndApplyAction();
@@ -47,19 +36,12 @@ namespace ToPSimulation
                 Prison.AddPeopleToPlace(newPrisoners);
                 City.RemovePeopleFromPlace(newPrisoners);
                 
-
                 List<IPerson> prisonersToRelease = Prison.GetReleasedThiefs();
-
                 City.AddPeopleToRandomPosition(prisonersToRelease);
                 Prison.RemovePeopleFromPlace(prisonersToRelease);
 
-
                 Prison.MovePeople();
 
-                
-                
-                
-                
                 City.WriteOutCity();
                 Prison.WriteOutPrison();
                 StatusFeed.WriteStatus(City.People);
@@ -67,16 +49,12 @@ namespace ToPSimulation
 
                 if (amountOfEvents > 0)
                 {
-                    Thread.Sleep(2000);
+                    Thread.Sleep(300);
                 }
                 else
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(100);
                 }
-
-
-
-
             }
         }
     }

@@ -36,7 +36,6 @@ namespace ToPSimulation
             }
         }
 
-
         public void WriteOutNews()
         {
             Console.Write(Helper.newsString);
@@ -47,12 +46,7 @@ namespace ToPSimulation
                 Console.WriteLine($"{(newsIndex - index)}: {news}");
                 index++;
             }
-            //foreach (string news in News)
-            //{
-            //    Console.WriteLine($"{(newsIndex - index)}: {news}");
-            //    index++;
-
-            //}
+           
         }
     }
 }
