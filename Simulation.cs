@@ -49,11 +49,11 @@ namespace ToPSimulation
 
                 if (amountOfEvents > 0)
                 {
-                    Thread.Sleep(300);
+                    Thread.Sleep(2000);
                 }
                 else
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(500);
                 }
             }
         }
